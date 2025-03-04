@@ -1,6 +1,173 @@
+:root{
+  --primary:#222;
+  --secondary:#fff;
+  --secondary-translucent:rgba(255,255,255,0.75);
+  --accent:#01b0d3;
+  --accent2:hsl(190, 99%, 21%);
+}
+
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+  padding:0;
+  margin:0;
+}
+
+body{
+  background-color: var(--secondary);
+  color:var(--primary);
+  font-family: "Raleway", sans-serif;
+}
+
+main{
+  padding:1rem;
+  display:flex;
+  flex-direction: column;
+  gap:2rem;
+}
+
+#top-header{
+  display:flex;
+  width:100%;
+  justify-content: space-between;
+  padding:1rem;
+}
+
+.siteName a{
+  font-size:2rem;
+  text-decoration: none;
+  font-weight:bold;
+  color:var(--primary);
+}
+
+#tools a{
+  text-decoration: none;
+  color:var(--primary);
+}
+
+nav{
+  background-color:var(--primary);
+  color:var(--secondary);
+}
+
+nav ul{
+  display:flex;
+  justify-content: space-evenly;
+}
+
+nav ul li{
+  list-style: none;
+  padding:1rem;
+}
+
+#hero{
+  position:relative;
+  width:100%;
+}
+
+#hero img{
+  width:100%;
+  height:auto;
+}
+
+#hero-overlay{
+  position:absolute;
+  top:1rem;
+  left:1rem;
+  color:var(--accent2);
+  background-color: var(--secondary-translucent);
+  width:fit-content;
+  padding:0.5rem;
+  display:flex;
+  flex-direction: column;
+  gap:0.5rem;
+}
+
+#hero-overlay ul{
+  list-style: none;
+}
+
+#hero-overlay img{
+  width:160px;
+  height:auto;
+}
+
+#reviews ul{
+  margin-left:1.2rem;
+}
+
+#reviews ul li{
+  margin: 1rem 0;
+}
+
+#upgrades{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:1rem;
+  width:fit-content;
+  text-align: center;
+}
+
+#upgrades h2{
+  text-align: left;
+  grid-column: 1/3;
+}
+
+.upgrade-background{
+  border:1px solid var(--primary);
+  background-color: var(--accent);
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:175px;
+  height:90px;
+}
+
+.upgrade img{
+  margin:0 auto;
+}
+
+footer{
+  margin-top:1rem;
+}
+
+@media screen and (min-width: 550px) {
+  
+  body{
+    background-image: url('/images/site/small_check.jpg');
+  }
+  
+  #wrapper{
+    width:80%;
+    margin:1rem auto;
+    padding:1rem;
+    border:3px solid var(--accent);
+    border-radius: 1rem;
+    background-color: var(--secondary);
+  }
+
+  main{
+    display:grid;
+    grid-template-areas: 'title title'
+                         'hero hero'
+                         'upgrades reviews';
+  }
+
+  main h1{
+    grid-area:title;
+  }
+
+  #hero{
+    grid-area:hero;
+  }
+
+  #upgrades{
+    grid-area:upgrades;
+  }
+
+  #reviews{
+    grid-area:reviews;
+  }
 }
