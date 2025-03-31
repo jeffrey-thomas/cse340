@@ -23,9 +23,13 @@ body{
 
 main{
   padding:1rem;
+}
+
+#home{
   display:flex;
   flex-direction: column;
   gap:2rem;
+  width:100%;
 }
 
 #top-header{
@@ -49,7 +53,6 @@ main{
 
 nav{
   background-color:var(--primary);
-  color:var(--secondary);
 }
 
 nav ul{
@@ -60,6 +63,11 @@ nav ul{
 nav ul li{
   list-style: none;
   padding:1rem;
+}
+
+nav ul li a{
+  color:var(--secondary);
+  text-decoration: none;
 }
 
 #hero{
@@ -133,7 +141,31 @@ footer{
   margin-top:1rem;
 }
 
-@media screen and (min-width: 550px) {
+#inv-display{
+  list-style: none;
+  display:grid;
+  gap:1rem;
+  text-align: center;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-items: center;
+  align-items: center;
+  margin-top:1rem;
+}
+
+#inv-display li{
+  background-color: var(--primary);
+  padding:1rem;
+  color:var(--secondary);
+  width:300px;
+  border-radius:1rem;
+}
+
+#inv-display li a{
+  color:var(--secondary);
+  text-decoration: none;
+}
+
+@media screen and (min-width: 700px) {
   
   body{
     background-image: url('/images/site/small_check.jpg');
@@ -148,14 +180,14 @@ footer{
     background-color: var(--secondary);
   }
 
-  main{
+  #home{
     display:grid;
     grid-template-areas: 'title title'
                          'hero hero'
                          'upgrades reviews';
   }
 
-  main h1{
+  #home h1{
     grid-area:title;
   }
 
