@@ -25,6 +25,10 @@ main{
   padding:1rem;
 }
 
+h1{
+  margin-bottom:1rem;
+}
+
 #home{
   display:flex;
   flex-direction: column;
@@ -149,7 +153,6 @@ footer{
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   justify-items: center;
   align-items: center;
-  margin-top:1rem;
 }
 
 #inv-display li{
