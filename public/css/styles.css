@@ -196,6 +196,62 @@ hr{
   font-weight: bold;
 }
 
+.notice{
+  color:red;
+  font-style: italic;
+  margin-left:1.5rem;
+}
+
+form{
+  border:3px solid var(--accent);
+  border-radius: 1rem;
+  padding:1rem;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  gap:1rem;
+  font-weight: bold;
+  max-width: 600px;
+  background-color: rgba(1, 176, 211,0.2);
+  margin:0 auto;
+}
+
+form label{
+  display:flex;
+  flex-direction: column;
+  width:100%;
+}
+
+form input{
+  width:100%;
+  padding:0.5rem;
+}
+
+form input[type="submit"]{
+  padding:0.5rem 3rem;
+  width:fit-content;
+  border-radius: 1rem;
+  font-weight: bolder;
+  background-color: var(--accent2);
+  color:var(--secondary);
+}
+
+form p{
+  text-decoration: underline;
+}
+
+form li{
+  list-style-position: inside;
+}
+
+input:required:invalid, input:focus:invalid{
+  border:1px solid red;
+}
+
+input:required:valid{
+  border:1px solid green;
+}
+
 @media screen and (min-width: 700px) {
   
   body{
@@ -213,13 +269,8 @@ hr{
 
   #home{
     display:grid;
-    grid-template-areas: 'title title'
-                         'hero hero'
+    grid-template-areas: 'hero hero'
                          'upgrades reviews';
-  }
-
-  #home h1{
-    grid-area:title;
   }
 
   #hero{
