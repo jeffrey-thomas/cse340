@@ -1,0 +1,125 @@
+ <!-- Heading-->
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+    res.redirect('/')
+} %>
+
+<form id="add-vehicle-form" action="/inv/add-vehicle" method="post">
+    <!--Message Block-->
+    <%- messages() %>
+
+    <!-- Error Block -->
+    <% if (errors) { %>
+        <ul class="notice">
+            <% errors.array().forEach(error=>{ %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+    <label>
+        Vehicle Classification*
+        <%- classificationMenu %>
+    </label>
+
+    <label>
+        Vehicle Make*
+        <input 
+            type="text" 
+            name="inv_make" 
+            required 
+            placeholder="Enter the vehicle make" 
+            value="<%= locals.inv_make %>"
+        >
+    </label>
+
+    <label>
+        Vehicle Model*
+        <input 
+            type="text" 
+            name="inv_model" 
+            required 
+            placeholder="Enter the vehicle model" 
+            value="<%= locals.inv_make %>"
+        >
+    </label>
+
+    <label>
+        Vehicle Year*
+        <input  
+            type="text" 
+            name="inv_year" 
+            required 
+            placeholder="Enter the vehicle year as 4 digits" 
+            value="<%= locals.inv_year %>"
+            pattern="^[1-2][0-9][0-9][0-9]$"
+        >
+    </label>
+
+    <label>
+        Vehicle Description*
+        <textarea
+            name="inv_description"
+            required
+            placeholder="Enter a description of the vehicle"
+        ><%= locals.inv_description %></textarea>
+    </label>
+
+    <label>
+        Vehicle Image*
+        <input 
+            type="text" 
+            name="inv_image" 
+            required 
+            placeholder="Enter the path to the vehicles image" 
+            value="<%= locals.inv_image || '/images/vehicles/no-image.png' %>"
+        >
+    </label>
+
+    <label>
+        Vehicle Thumbnail*
+        <input 
+            type="text" 
+            name="inv_thumbnail" 
+            required 
+            placeholder="Enter the path to the vehicles thumbnail image" 
+            value="<%= locals.inv_thumbnail || '/images/vehicles/no-image-tn.png' %>"
+        >
+    </label>
+
+    <label>
+        Vehicle Price*
+        <input 
+            type="number" 
+            name="inv_price" 
+            required 
+            placeholder="Enter the price of the vehicle" 
+            value="<%= locals.inv_price %>"
+        >
+    </label>
+
+    <label>
+        Vehicle Miles*
+        <input 
+            type="number" 
+            name="inv_miles" 
+            required 
+            placeholder="Enter the current miles on the vehicle" 
+            value="<%= locals.inv_miles %>"
+        >
+    </label>
+
+    <label>
+        Vehicle Color*
+        <input 
+            type="text" 
+            name="inv_color" 
+            required 
+            placeholder="Enter the color of the vehicle" 
+            value="<%= locals.inv_color %>"
+        >
+    </label>
+
+    <input type="submit" value="Add Vehicle">
+</form>

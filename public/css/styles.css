@@ -222,7 +222,7 @@ form label{
   width:100%;
 }
 
-form input{
+form input, select{
   width:100%;
   padding:0.5rem;
 }
@@ -240,11 +240,11 @@ form li{
   list-style-position: inside;
 }
 
-input:required:invalid, input:focus:invalid{
+input:required:invalid, input:focus:invalid, textarea:required:invalid{
   border:1px solid red;
 }
 
-input:required:valid{
+input:required:valid, textarea:required:valid{
   border:1px solid green;
 }
 

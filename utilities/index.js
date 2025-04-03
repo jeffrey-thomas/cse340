@@ -13,7 +13,7 @@ Util.getNav = async function(req, res, next){
         <li>
         <a 
             href="/inv/type/${row.classification_id}" 
-            title="See out inventory of ${row.classification_name} vehicles"
+            title="See inventory of ${row.classification_name} vehicles"
         >${row.classification_name}</a>
         </li>
         `
@@ -25,7 +25,7 @@ Util.getNav = async function(req, res, next){
 * Build the classification view HTML
 * ************************************ */
 Util.buildClassificationGrid = async function(data){
-    let grid
+    let grid = ''
     if(data.length > 0){
       grid = '<ul id="inv-display">'
       data.forEach(vehicle => { 
@@ -85,6 +85,24 @@ Util.buildItemDetails = async function(data){
         </div>
     `
     return details
+}
+
+Util.buildClassificationMenu = async function(classification_id=null){
+    let data = await invModel.getClassifications()
+    let menu = `
+        <select name="classification_id" id="select-classification" required>
+            <option value=''>Choose a Classification</option>
+    `
+    data.rows.forEach((row)=>{
+        menu += `<option value='${row.classification_id}'`
+
+        if(classification_id!=null && row.classification_id == classification_id)
+            menu += ' selected'
+
+        menu+=`>${row.classification_name}</option>`
+    })
+    menu += '</select>'
+    return menu
 }
 
 /* ****************************************
