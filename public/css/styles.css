@@ -241,6 +241,10 @@ form input[type="submit"]{
   color:var(--secondary);
 }
 
+form input[type="submit"]:disabled{
+  background-color:gray;
+}
+
 form li{
   list-style-position: inside;
 }

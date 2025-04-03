@@ -35,6 +35,12 @@ router.post(
 
 //Modify Vehicle
 router.get("/edit/:inv_id", utilities.handleErrors(invController.buildModifyVehicle))
+router.post(
+    "/edit-vehicle/",
+    invValidate.addVehicleRules(),
+    invValidate.checkUpdateData, 
+    utilities.handleErrors(invController.updateVehicle)
+)
 
 //Get vehicles by category
 router.get('/getInventory/:classification_id', utilities.handleErrors(invController.getInventoryJSON))
