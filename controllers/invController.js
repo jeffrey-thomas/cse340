@@ -205,12 +205,15 @@ invCont.buildModifyVehicle = async (req, res, next)=>{
 
 invCont.getInventoryJSON = async (req, res, next)=>{
     const classification_id = parseInt(req.params.classification_id)
-
     const invData = await invModel.getInventoryByClassificationId(classification_id)
-
-    if(invData[0].inv_id){
+    
+    if(invData[0] && invData[0].inv_id){
         return res.json(invData)
     } else {
+        //handle categories with no vehicles
+        if(Array.isArray(invData) && invData.length===0)
+            return res.json(invData)
+
         next(new Error("No data returned"))
     }
 }
@@ -272,6 +275,48 @@ invCont.updateVehicle = async function(req, res){
             inv_miles,
             inv_color
         })
+    }
+}
+
+/* ****************************************
+*  Deliver Delete Vehicle Form
+* *************************************** */
+invCont.buildConfirmDelete = async (req, res, next)=>{
+    let nav = await utilities.getNav()
+   
+    const inv_id = req.params.inv_id
+    const itemData = await invModel.getItemByInventoryId(inv_id)
+
+    const name = `${itemData.inv_make} ${itemData.inv_model}`
+
+    res.render("./inventory/confirm-delete-vehicle",{
+        title:`Edit ${name}`,
+        nav,
+        errors:null,
+        inv_id: itemData.inv_id,
+        inv_make: itemData.inv_make,
+        inv_model: itemData.inv_model,
+        inv_year: itemData.inv_year,
+        inv_price: itemData.inv_price,
+    })    
+}
+
+/* ****************************************
+*  Process Delete Vehicle Action
+* *************************************** */
+invCont.deleteVehicle = async function(req, res){
+    let nav = await utilities.getNav()
+
+    const inv_id = parseInt(req.body.inv_id)
+
+    const dbResult = await invModel.deleteVehicle(inv_id)
+
+    if(dbResult){
+        req.flash("notice", `Deletion was successful.`)
+        res.redirect('/inv/')
+    } else {
+        req.flash("notice", "Sorry, the delete failed.")
+        res.redirect(`/inv/delete/${inv_id}`)
     }
 }
 

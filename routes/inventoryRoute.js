@@ -42,6 +42,13 @@ router.post(
     utilities.handleErrors(invController.updateVehicle)
 )
 
+//Delete Vehicle
+router.get("/delete/:inv_id", utilities.handleErrors(invController.buildConfirmDelete))
+router.post(
+    "/delete",
+    utilities.handleErrors(invController.deleteVehicle)
+)
+
 //Get vehicles by category
 router.get('/getInventory/:classification_id', utilities.handleErrors(invController.getInventoryJSON))
 

@@ -95,18 +95,26 @@ Util.buildItemDetails = async function(data){
  ********************************/
 Util.buildClassificationMenu = async function(classification_id=null){
     let data = await invModel.getClassifications()
-    let menu = `
-        <select name="classification_id" id="select-classification" required>
-            <option value=''>Choose a Classification</option>
-    `
+    let menu = `<select name="classification_id" id="select-classification" required>`
+    let options = ''
+    let hasSelection = false
     data.rows.forEach((row)=>{
-        menu += `<option value='${row.classification_id}'`
+        options += `<option value='${row.classification_id}'`
 
-        if(classification_id!=null && row.classification_id == classification_id)
-            menu += ' selected'
+        if(classification_id!=null && row.classification_id == classification_id){
+            options += ' selected'
+            hasSelection = true
+        }
 
-        menu+=`>${row.classification_name}</option>`
+        options+=`>${row.classification_name}</option>`
     })
+
+    menu+="<option value='' disabled"
+    if(!hasSelection)
+        menu+=" selected"
+
+    menu += ">Choose a Classification</option>"
+    menu += options
     menu += '</select>'
     return menu
 }
