@@ -5,12 +5,22 @@
     res.redirect('/')
 } %>
 
-<form id="login-form">
+<form id="login-form" action="/account/login" method="post">
     <!--Message Block-->
-<%- messages() %>
+    <%- messages() %>
+
+    <!-- Error Block -->
+    <% if (errors) { %>
+        <ul class="notice">
+            <% errors.array().forEach(error=>{ %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
     <label>
         Email*
-        <input type="email" name="account_email" required placeholder="Enter a valid email address">
+        <input type="email" name="account_email" required placeholder="Enter a valid email address" value="<%= locals.account_email %>">
     </label>
     <label>
         Password*

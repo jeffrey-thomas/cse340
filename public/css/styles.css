@@ -236,10 +236,6 @@ form input[type="submit"]{
   color:var(--secondary);
 }
 
-form p{
-  text-decoration: underline;
-}
-
 form li{
   list-style-position: inside;
 }
