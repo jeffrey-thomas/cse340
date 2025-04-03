@@ -33,4 +33,10 @@ router.post(
     utilities.handleErrors(invController.addVehicle)
 )
 
+//Modify Vehicle
+router.get("/edit/:inv_id", utilities.handleErrors(invController.buildModifyVehicle))
+
+//Get vehicles by category
+router.get('/getInventory/:classification_id', utilities.handleErrors(invController.getInventoryJSON))
+
 module.exports = router

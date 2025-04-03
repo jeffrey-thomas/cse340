@@ -43,10 +43,14 @@ invCont.buildInventoryDetailView = async function(req, res, next){
 invCont.buildManagementView = async function(req, res, next){
     let nav = await utilities.getNav()
 
+    const classificationMenu = await utilities.buildClassificationMenu()
+
     res.render("./inventory/management",{
         title:"Inventory Management",
         nav,
+        classificationMenu
     })
+
 }
 
 /* ****************************************
@@ -165,6 +169,49 @@ invCont.addVehicle = async function(req, res){
             inv_miles,
             inv_color
         })
+    }
+}
+
+/* ****************************************
+*  Deliver Modify Vehicle Form
+* *************************************** */
+invCont.buildModifyVehicle = async (req, res, next)=>{
+    let nav = await utilities.getNav()
+   
+    const inv_id = req.params.inv_id
+    const itemData = await invModel.getItemByInventoryId(inv_id)
+    const classificationMenu = await utilities.buildClassificationMenu(itemData.classification_id)
+
+    const name = `${itemData.inv_make} ${itemData.inv_model}`
+
+    res.render("./inventory/edit-vehicle",{
+        title:`Edit ${name}`,
+        nav,
+        classificationMenu,
+        errors:null,
+        inv_id: itemData.inv_id,
+        inv_make: itemData.inv_make,
+        inv_model: itemData.inv_model,
+        inv_year: itemData.inv_year,
+        inv_description: itemData.inv_description,
+        inv_image: itemData.inv_image,
+        inv_thumbnail: itemData.inv_thumbnail,
+        inv_price: itemData.inv_price,
+        inv_miles: itemData.inv_miles,
+        inv_color: itemData.inv_color,
+        classification_id: itemData.classification_id
+    })    
+}
+
+invCont.getInventoryJSON = async (req, res, next)=>{
+    const classification_id = parseInt(req.params.classification_id)
+
+    const invData = await invModel.getInventoryByClassificationId(classification_id)
+
+    if(invData[0].inv_id){
+        return res.json(invData)
+    } else {
+        next(new Error("No data returned"))
     }
 }
 

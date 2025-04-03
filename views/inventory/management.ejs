@@ -9,5 +9,16 @@
 <%- messages() %>
 
 <a href="/inv/add-classification">New Classification</a>
-<br>
+
 <a href="/inv/add-vehicle">New Vehicle</a>
+
+<h2>Manage Inventory</h2>
+<p>Select a classification to view vehicles.</p>
+
+<%- classificationMenu %>
+
+<table id="inventoryDisplay"></table>
+
+<noscript>Javascript must be enabled to use this page.</noscript>
+
+<script src="../../js/inventory.js"></script>
