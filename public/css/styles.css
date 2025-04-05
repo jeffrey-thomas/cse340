@@ -54,6 +54,11 @@ h1{
   color:var(--primary);
 }
 
+#tools{
+  display:flex;
+  gap:2rem;
+}
+
 #tools a{
   text-decoration: none;
   color:var(--primary);
@@ -204,6 +209,7 @@ hr{
   color:red;
   font-style: italic;
   margin-left:1.5rem;
+  list-style: none;
 }
 
 form{
@@ -236,7 +242,7 @@ form input[type="submit"]{
   padding:0.5rem 3rem;
   width:fit-content;
   border-radius: 1rem;
-  font-weight: bolder;
+  font-weight: bold;
   background-color: var(--accent2);
   color:var(--secondary);
 }

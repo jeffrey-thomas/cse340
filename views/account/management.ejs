@@ -5,7 +5,19 @@
     res.redirect('/')
 } %>
 
+<h2>Welcome, <%- locals.accountData.account_firstname %></h2>
+
 <!--Message Block-->
 <%- messages() %>
 
-<p>You're logged in.</p>
+<h3>Account Details</h3>
+<p><span class="details-label">First Name:</span> <%- locals.accountData.account_firstname %> </p>
+<p><span class="details-label">Last Name:</span> <%- locals.accountData.account_lastname %> </p>
+<p><span class="details-label">Email:</span> <%- locals.accountData.account_email %> </p>
+
+ <a href="/account/update/" title="Click to update your account.">Update Account</a>
+
+<% if(locals.accountData.account_type !== "Client") { %>
+    <h3>Inventory Management</h3>
+    <p><a href="/inv/" title="Click to manage inventory">Click to manage inventory.</a></p>
+<% } %>

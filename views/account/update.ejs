@@ -1,0 +1,57 @@
+ <!-- Heading-->
+ <% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+    res.redirect('/')
+} %>
+
+<!--Message Block-->
+<%- messages() %>
+
+<!-- Error Block -->
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error=>{ %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+
+<form id="account-update-form" action="/account/update" method="post">
+    <h2>Personal Information</h2>
+    <label>
+        First name
+        <input type="text" name="account_firstname" required value="<%= locals.account_firstname || locals.accountData.account_firstname %>">
+    </label>
+    <label>
+        Last name
+        <input type="text" name="account_lastname" required value="<%= locals.account_lastname || locals.accountData.account_lastname %>">
+    </label>
+    <label>
+        Email
+        <input type="email" name="account_email" required placeholder="Enter a valid email address" value="<%= locals.account_email || locals.accountData.account_email %>">
+    </label>
+    <input type="submit" value="Update Information">
+    <input type="hidden" name="account_id" value="<%- locals.accountData.account_id %>">
+</form>
+
+
+<form id="password-update-form" action="/account/update-password" method="post">
+    <h2>Password</h2>
+    <label>
+        New Password*
+        <input type="password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+    </label>
+    <div>
+        <p>Submitting this form will change your password.</p>
+        <p>Password must contain at least:</p>
+        <ul>
+            <li>12 characters (minimum)</li>
+            <li>1 capital letter</li>
+            <li>1 number</li>
+            <li>1 special character</li>
+        </ul>
+    </div>
+    <input type="submit" value="Update Password">
+    <input type="hidden" name="account_id" value="<%- locals.accountData.account_id %>">
+</form>

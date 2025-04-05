@@ -13,10 +13,10 @@ router.get("/detail/:inventoryId", utilities.handleErrors(invController.buildInv
  * MANAGEMENT ROUTES
  ********************/
 
-router.get("/", utilities.handleErrors(invController.buildManagementView))
+router.get("/", utilities.checkEmployment, utilities.handleErrors(invController.buildManagementView))
 
 //Add Classification
-router.get("/add-classification", utilities.handleErrors(invController.buildAddClass))
+router.get("/add-classification", utilities.checkEmployment, utilities.handleErrors(invController.buildAddClass))
 router.post(
     "/add-classification",
     invValidate.addClassRules(),
@@ -25,7 +25,7 @@ router.post(
 )
 
 //Add Vehicle
-router.get("/add-vehicle", utilities.handleErrors(invController.buildAddVehicle))
+router.get("/add-vehicle", utilities.checkEmployment, utilities.handleErrors(invController.buildAddVehicle))
 router.post(
     "/add-vehicle",
     invValidate.addVehicleRules(),
@@ -34,7 +34,7 @@ router.post(
 )
 
 //Modify Vehicle
-router.get("/edit/:inv_id", utilities.handleErrors(invController.buildModifyVehicle))
+router.get("/edit/:inv_id", utilities.checkEmployment, utilities.handleErrors(invController.buildModifyVehicle))
 router.post(
     "/edit-vehicle/",
     invValidate.addVehicleRules(),
@@ -43,7 +43,7 @@ router.post(
 )
 
 //Delete Vehicle
-router.get("/delete/:inv_id", utilities.handleErrors(invController.buildConfirmDelete))
+router.get("/delete/:inv_id", utilities.checkEmployment, utilities.handleErrors(invController.buildConfirmDelete))
 router.post(
     "/delete",
     utilities.handleErrors(invController.deleteVehicle)

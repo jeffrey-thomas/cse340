@@ -28,4 +28,26 @@ router.post(
     utilities.handleErrors(accountController.accountLogin)
 )
 
+//Serve Account Update Forms
+router.get("/update", utilities.checkLogin, utilities.handleErrors(accountController.buildUpdate))
+
+//Process Update Info
+router.post(
+    "/update", 
+    regValidate.updateInfoRules(),
+    regValidate.checkUpdateInfoData,
+    utilities.handleErrors(accountController.updateAccount)
+)
+
+//Process Update Info
+router.post(
+    "/update-password", 
+    regValidate.passwordRules(),
+    regValidate.checkPasswordData,
+    utilities.handleErrors(accountController.updatePassword)
+)
+
+//Logout
+router.get("/logout", utilities.handleErrors(accountController.logout))
+
 module.exports = router;
