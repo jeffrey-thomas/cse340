@@ -1,0 +1,71 @@
+ <!-- Heading-->
+ <% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+    res.redirect('/')
+} %>
+
+<form id="write-form" action="/reviews/edit" method="post">
+    <!--Message Block-->
+    <%- messages() %>
+
+    <!-- Error Block -->
+    <% if (errors) { %>
+        <ul class="notice">
+            <% errors.array().forEach(error=>{ %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+    <label>
+        Vehicle Make
+        <input 
+            type="text" 
+            name="inv_make" 
+            required 
+            value="<%= locals.inv_make %>"
+            readonly
+        >
+    </label>
+
+    <label>
+        Vehicle Model
+        <input 
+            type="text" 
+            name="inv_model" 
+            required 
+            value="<%= locals.inv_model %>"
+            readonly
+        >
+    </label>
+
+    <label>
+        Score*
+        <input  
+            type="number" 
+            name="review_score" 
+            required 
+            placeholder="Integer from 1 to 5" 
+            value="<%= locals.review_score %>"
+            min="1"
+            max="5"
+            step="1"
+        >
+    </label>
+
+    <label>
+        Review*
+        <textarea
+            name="review_text"
+            required
+            placeholder="Write your review here"
+        ><%= locals.review_text %></textarea>
+    </label>
+
+    <input type="submit" value="Confirm Changes">
+
+    <input type="hidden" name="account_id" value="<%= locals.account_id %>">
+    <input type="hidden" name="inv_id" value="<%=locals.inv_id%>">
+
+</form>

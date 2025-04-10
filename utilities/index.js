@@ -90,6 +90,48 @@ Util.buildItemDetails = async function(data){
     return details
 }
 
+/* **************************************
+* Build the item review section
+* ************************************ */
+Util.buildItemReviews = async function(account_id, inv_id, allReviews, userReview){
+
+    //Begin Section - Heading
+    let reviews = `
+        <div id="reviews">
+            <h2>Reviews</h2>
+    `
+    //Add - Edit - Delete Options
+    //if loggedin
+    if(account_id != null)
+        if(!userReview && account_id){
+            reviews += `<a href="/reviews/write/${inv_id}" title="Clicke to Write a review">Write a review</a>`
+        } else {
+            reviews += `
+                <a href="/reviews/edit/${inv_id}" title="Click to edit your review">Edit Review</a>
+                <a href="/reviews/delete/${inv_id}" title="Click to delete your review">Delete Review</a> 
+            `
+        }
+
+    //review display
+    if(allReviews.length===0)
+        reviews += '<p>There are currently no reviews for this product.</p>'
+    else{
+        allReviews.forEach(review=>{
+            reviews += `
+                <div class="item-review">
+                    <p>${review.review_score}/5</p>
+                    <p>"${review.review_text}" --${review.account_firstname}</p>
+                </div>
+            `
+        })
+    }
+
+    //End section
+    reviews += "</div>"
+
+   return reviews
+}
+
 /********************************
  * Build classification drop down
  ********************************/

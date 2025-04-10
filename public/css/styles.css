@@ -263,6 +263,10 @@ input:required:valid, textarea:required:valid{
   border:1px solid green;
 }
 
+input:read-only{
+  background-color:rgba(240,240,240,1);
+}
+
 #inventoryDisplay{
   border-collapse:collapse;
 }
@@ -285,6 +289,17 @@ input:required:valid, textarea:required:valid{
 
 #inventoryDisplay thead{
   background-color: var(--accent-translucent);
+}
+
+#reviews{
+  display:flex;
+  flex-direction: column;
+  gap:1rem;
+}
+
+.item-review{
+  display:flex;
+  gap:2rem;
 }
 
 @media screen and (min-width: 700px) {

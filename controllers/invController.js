@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const revModel = require("../models/review-model")
 const utilities = require("../utilities")
 
 const invCont = {}
@@ -26,14 +27,27 @@ invCont.buildByClassificationId = async function(req, res, next){
 invCont.buildInventoryDetailView = async function(req, res, next){
     const inventory_id = req.params.inventoryId
     const data = await invModel.getItemByInventoryId(inventory_id)
+    
+    const reviewData = await revModel.getReviews(inventory_id)
+    
+    let account_id = null
+    if(res.locals.loggedin)
+        account_id = res.locals.accountData.account_id
+
+    let userReview = null
+    if(account_id!=null)
+        userReview = await revModel.getUserReview(account_id, inventory_id)
+
     const details = await utilities.buildItemDetails(data)
+    const reviews = await utilities.buildItemReviews(account_id, inventory_id,reviewData, userReview)
     let nav = await utilities.getNav()
     const title = `${data.inv_year} ${data.inv_make} ${data.inv_model}`
 
     res.render("./inventory/details",{
         title:title,
         nav,
-        details
+        details,
+        reviews
     })
 }
 
@@ -81,8 +95,10 @@ invCont.addClassification = async function(req, res){
             `Classification '${classification_name}' successfully created.`
         )
         let nav = await utilities.getNav()
+        let classificationMenu = await utilities.buildClassificationMenu()
         res.status(201).render("inventory/management",{
             title:"Inventory Management",
+            classificationMenu,
             nav,
         })
     } else {

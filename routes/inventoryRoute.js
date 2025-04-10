@@ -3,6 +3,7 @@ const router = new express.Router()
 const invController = require("../controllers/invController")
 const utilities = require("../utilities")
 const invValidate = require("../utilities/inventory-validation")
+const revValidate = require("../utilities/review-validation")
 
 
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId))
